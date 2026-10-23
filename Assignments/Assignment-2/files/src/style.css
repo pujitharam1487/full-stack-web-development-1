@@ -1,0 +1,474 @@
+/* =====================================================
+   Student Performance Dashboard - style.css
+   Phase 1: layout and appearance
+   ===================================================== */
+
+/* ---------- Theme colors (change these to restyle the app) ---------- */
+:root {
+  --blue-900: #0b2a5b;
+  --blue-700: #1d4ed8;
+  --blue-600: #2563eb;
+  --blue-100: #dbeafe;
+  --blue-50:  #eff6ff;
+  --white:    #ffffff;
+  --bg:       #f4f7fc;
+  --text:     #1e293b;
+  --muted:    #64748b;
+  --border:   #e2e8f0;
+
+  --sidebar-width: 240px;
+  --radius: 10px;
+}
+
+/* ---------- Basic reset ---------- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+}
+
+svg { width: 20px; height: 20px; fill: currentColor; flex-shrink: 0; }
+
+/* =====================================================
+   SIDEBAR
+   ===================================================== */
+.sidebar {
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  width: var(--sidebar-width);
+  background: var(--blue-900);
+  color: var(--white);
+  padding: 20px 14px;
+  z-index: 30;
+  transition: transform 0.25s ease;
+}
+
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 10px 24px;
+}
+
+.brand-mark {
+  display: grid;
+  place-items: center;
+  width: 36px; height: 36px;
+  background: var(--blue-600);
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.brand-name { font-size: 1.15rem; font-weight: 600; }
+
+.sidebar-nav { display: flex; flex-direction: column; gap: 4px; }
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 12px;
+  border-radius: 8px;
+  color: #c7d6f3;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: background 0.15s, color 0.15s;
+}
+
+.nav-link:hover { background: rgba(255, 255, 255, 0.08); color: var(--white); }
+.nav-link.active { background: var(--blue-600); color: var(--white); }
+
+.nav-link:focus-visible,
+.btn:focus-visible,
+.input:focus-visible {
+  outline: 3px solid #93c5fd;
+  outline-offset: 2px;
+}
+
+/* =====================================================
+   MAIN AREA + TOP BAR
+   ===================================================== */
+.main { margin-left: var(--sidebar-width); min-height: 100vh; }
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  height: 64px;
+  padding: 0 24px;
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+}
+
+.topbar-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--blue-900);
+  flex: 1;
+}
+
+.profile { display: flex; align-items: center; gap: 10px; }
+.profile-name { font-size: 0.9rem; color: var(--muted); }
+
+.avatar {
+  display: grid;
+  place-items: center;
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  background: var(--blue-100);
+  color: var(--blue-700);
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+/* Hamburger button (only visible on mobile) */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px;
+  cursor: pointer;
+}
+.hamburger span {
+  width: 22px; height: 2px;
+  background: var(--blue-900);
+  border-radius: 2px;
+}
+
+.menu-toggle { display: none; }
+.overlay { display: none; }
+
+.content { padding: 24px; max-width: 1200px; margin: 0 auto; }
+
+/* =====================================================
+   STATISTIC CARDS
+   ===================================================== */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.stat-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.stat-icon {
+  display: grid;
+  place-items: center;
+  width: 46px; height: 46px;
+  border-radius: 10px;
+}
+.stat-icon.blue  { background: var(--blue-100); color: var(--blue-700); }
+.stat-icon.sky   { background: #e0f2fe; color: #0369a1; }
+.stat-icon.green { background: #dcfce7; color: #15803d; }
+.stat-icon.amber { background: #fef3c7; color: #b45309; }
+
+.stat-label { font-size: 0.85rem; color: var(--muted); }
+.stat-value { font-size: 1.6rem; font-weight: 700; color: var(--blue-900); line-height: 1.2; }
+
+/* =====================================================
+   STUDENT TABLE PANEL
+   ===================================================== */
+.panel {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+}
+
+.panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.panel-head h2 { font-size: 1.1rem; color: var(--blue-900); }
+
+/* Buttons */
+.btn {
+  border: none;
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+}
+.btn:active { transform: scale(0.97); }
+.btn-primary { background: var(--blue-600); color: var(--white); }
+.btn-primary:hover { background: var(--blue-700); }
+
+/* Search + filters */
+.toolbar {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.input {
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--white);
+  font-size: 0.9rem;
+  font-family: inherit;
+  color: var(--text);
+}
+.input:focus { border-color: var(--blue-600); }
+.search { flex: 1; min-width: 0; }
+
+/* Table */
+.table-wrap { overflow-x: auto; }
+
+table { width: 100%; border-collapse: collapse; min-width: 640px; }
+
+th, td { padding: 12px 14px; text-align: left; font-size: 0.9rem; }
+
+th {
+  background: var(--blue-50);
+  color: var(--blue-900);
+  font-weight: 600;
+  white-space: nowrap;
+}
+th:first-child { border-radius: 8px 0 0 8px; }
+th:last-child  { border-radius: 0 8px 8px 0; }
+
+td { border-bottom: 1px solid var(--border); }
+tbody tr:hover { background: var(--blue-50); }
+
+/* Grade badges */
+.badge {
+  display: inline-block;
+  min-width: 30px;
+  padding: 2px 10px;
+  border-radius: 999px;
+  text-align: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+.grade-a { background: #dcfce7; color: #15803d; }
+.grade-b { background: var(--blue-100); color: var(--blue-700); }
+.grade-c { background: #fef3c7; color: #b45309; }
+.grade-d { background: #ffedd5; color: #c2410c; }
+.grade-f { background: #fee2e2; color: #b91c1c; }
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+
+/* Tablet: 2 stat cards per row */
+@media (max-width: 1024px) {
+  .stats { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* Mobile: sidebar becomes a slide-in menu */
+@media (max-width: 768px) {
+  .sidebar { transform: translateX(-100%); }
+
+  .menu-toggle:checked ~ .sidebar { transform: translateX(0); }
+
+  .menu-toggle:checked ~ .overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.5);
+    z-index: 25;
+  }
+
+  .main { margin-left: 0; }
+  .hamburger { display: flex; }
+  .topbar { padding: 0 14px; }
+  .topbar-title { font-size: 1rem; }
+  .profile-name { display: none; }
+  .content { padding: 16px; }
+
+  .toolbar { flex-direction: column; }
+  .panel-head .btn { padding: 9px 12px; }
+}
+
+/* Small phones: 1 stat card per row */
+@media (max-width: 480px) {
+  .stats { grid-template-columns: 1fr; }
+}
+
+/* =====================================================
+   PHASE 2: row actions, dialogs, form, toasts
+   ===================================================== */
+
+/* Buttons */
+.btn-ghost { background: var(--blue-50); color: var(--blue-700); }
+.btn-ghost:hover { background: var(--blue-100); }
+.btn-danger { background: #dc2626; color: var(--white); }
+.btn-danger:hover { background: #b91c1c; }
+
+/* Edit / Delete buttons inside table rows */
+.row-actions { display: flex; gap: 6px; }
+.btn-small { padding: 5px 10px; font-size: 0.8rem; }
+.btn-small.btn-danger { background: #fee2e2; color: #b91c1c; }
+.btn-small.btn-danger:hover { background: #fecaca; }
+
+/* Message shown when no students match */
+.empty-row td { text-align: center; color: var(--muted); padding: 28px 14px; }
+
+/* Dialog (popup) */
+.dialog {
+  margin: auto;
+  width: min(460px, 92vw);
+  border: none;
+  border-radius: 12px;
+  padding: 24px;
+  color: var(--text);
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.25);
+}
+.dialog::backdrop { background: rgba(15, 23, 42, 0.5); }
+.dialog h2 { font-size: 1.15rem; color: var(--blue-900); margin-bottom: 16px; }
+.confirm-text { color: var(--muted); margin-bottom: 6px; }
+
+.dialog-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px; }
+
+/* Form fields */
+.field { margin-bottom: 14px; flex: 1; }
+.field label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px; }
+.field .input { width: 100%; }
+.field-row { display: flex; gap: 12px; }
+
+.input.invalid { border-color: #dc2626; background: #fef2f2; }
+.error { color: #b91c1c; font-size: 0.8rem; min-height: 1.1em; margin-top: 4px; }
+
+/* Toast messages */
+#toast-container {
+  position: fixed;
+  top: 76px;
+  right: 20px;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.toast {
+  padding: 12px 18px;
+  border-radius: 8px;
+  color: var(--white);
+  font-size: 0.9rem;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.2);
+}
+.toast.success { background: #15803d; }
+.toast.error { background: #b91c1c; }
+
+@media (max-width: 480px) {
+  .field-row { flex-direction: column; gap: 0; }
+  #toast-container { left: 14px; right: 14px; }
+}
+
+/* =====================================================
+   PHASE 4: analytics, charts, highlights
+   ===================================================== */
+
+.analytics {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.panel-title { font-size: 1.05rem; color: var(--blue-900); margin-bottom: 16px; }
+
+/* Grade distribution: vertical bars */
+.bar-chart { display: flex; align-items: flex-end; gap: 14px; min-height: 170px; }
+.bar-col { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 6px; }
+.bar-count { font-size: 0.85rem; font-weight: 600; color: var(--text); }
+.bar { width: 100%; max-width: 52px; border-radius: 6px 6px 0 0; transition: height 0.3s ease; }
+.bar-label { font-size: 0.85rem; font-weight: 600; color: var(--muted); }
+.bar.grade-a { background: #22c55e; }
+.bar.grade-b { background: var(--blue-600); }
+.bar.grade-c { background: #f59e0b; }
+.bar.grade-d { background: #f97316; }
+.bar.grade-f { background: #ef4444; }
+
+/* Subject averages: horizontal bars */
+.h-row { display: grid; grid-template-columns: 80px 1fr 44px; align-items: center; gap: 10px; margin-bottom: 14px; font-size: 0.9rem; }
+.h-track { height: 12px; background: var(--blue-50); border-radius: 999px; overflow: hidden; }
+.h-fill { height: 100%; background: var(--blue-600); border-radius: 999px; transition: width 0.3s ease; }
+.h-value { text-align: right; font-weight: 600; color: var(--blue-900); }
+
+/* Top performers */
+.rank-list { list-style: none; }
+.rank-list li, .alert-list li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+}
+.rank-list li:last-child, .alert-list li:last-child { border-bottom: none; }
+.rank-no {
+  display: grid; place-items: center;
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--blue-100); color: var(--blue-700);
+  font-size: 0.8rem; font-weight: 700;
+}
+.item-main { flex: 1; min-width: 0; }
+.item-name { font-weight: 600; font-size: 0.9rem; }
+.item-sub { font-size: 0.8rem; color: var(--muted); }
+.item-score { font-weight: 700; color: var(--blue-900); }
+
+/* Needs attention */
+.alert-list { list-style: none; }
+.alert-list .item-sub { color: #b91c1c; }
+.empty-note { color: var(--muted); font-size: 0.9rem; padding: 8px 0; }
+
+/* Low marks / attendance highlighted in the table */
+tr.at-risk { background: #fef2f2; }
+tr.at-risk:hover { background: #fee2e2; }
+tr.at-risk td:first-child { box-shadow: inset 3px 0 0 #dc2626; }
+td.low { color: #b91c1c; font-weight: 700; }
+
+/* Form hint + scrollable dialog on short screens */
+.form-hint { font-size: 0.8rem; color: var(--muted); margin-bottom: 12px; }
+.dialog { max-height: 92vh; overflow-y: auto; }
+
+@media (max-width: 900px) {
+  .analytics { grid-template-columns: 1fr; }
+}
+
+
+/* =====================================================
+   PHASE 6: polish
+   ===================================================== */
+html { scroll-behavior: smooth; }
+section[id] { scroll-margin-top: 80px; }
+
+/* Space between stacked panels */
+.panel + .panel { margin-top: 24px; }
+
+.settings-text { color: var(--muted); font-size: 0.9rem; margin-bottom: 14px; max-width: 560px; }
+
+/* Keyboard focus for dialogs and table buttons */
+.btn-small:focus-visible { outline: 3px solid #93c5fd; outline-offset: 1px; }
+
+/* Long names should wrap instead of stretching the table */
+td { word-break: break-word; }
+
+/* Respect users who prefer less motion */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { transition: none !important; }
+}
